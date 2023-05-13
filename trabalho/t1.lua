@@ -1,5 +1,4 @@
 yield = coroutine.yield
-wrap  = coroutine.wrap
 
 function FileGen(path)
 	-- open file
