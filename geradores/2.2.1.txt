@@ -1,0 +1,29 @@
+# 1. iterador
+class EvenIter:
+    def __init__(self):
+        self.i = 0
+    
+    def __iter__(self):
+        return self
+        
+    def __next__(self):
+        self.i += 2
+        return self.i - 2
+    
+for even in EvenIter():
+    print(even)
+
+# 2. gerador
+def EvenGen():
+    i = 0
+    while True:
+        yield i
+        i += 2
+        
+for even in EvenGen():
+    print(even)
+
+3. Nos iteradores o estado deve estar guardado fora da função (no caso de python, no self) para ela saber o que retornar na próxima chamada.
+Isso é necessário porque ela termina. O escopo dela morre.
+Já o gerador implementa alguma coisa que salva as variáveis locais e pausa a execução.
+Não precisa de nada externo. De resto é tudo igual.

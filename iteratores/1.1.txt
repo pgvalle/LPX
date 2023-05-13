@@ -1,0 +1,12 @@
+1. Um iterador é uma estrutura de dados que de alguma forma guarda qual o próximo elemento de uma coleção pra que iterar sobre essa coleção se torne tão trivial quanto iterar um array num for usando o operador de índice.
+Ex: o inteiro "i" que a gente usa no for é quase um iterador. Só não é porque não retorna o próximo elemento de um array específico, mas dá pra fazer algo relativamente simples pra isso:
+
+struct ArrayIter { unsigned stride, void* buffer; int elem_count; int i; };
+void* next(struct ArrayIter* it) {
+    if (it->i == it->elem_count) return NULL;
+    return it->buffer + (++it->i)*it->stride;
+}
+
+2. https://github.com/pgvalle/JVegred/blob/main/src/jvegred/CanvasManager.java.txt nas linhas 39, 93, 112, 156 e 215.
+linha 39/156/215: eu itero por todas as "figuras" de uma lista em específico e pego o retângulo de cada uma pra calcular um maior que tenha todas as figuras dentro dele.
+linha 93/112: Existem duas listas de figuras (selecionadas e não selecionadas). Talvez eu queira (des)selecionar todas elas. Pra isso pego cada figura de uma das listas e jogo na outra.
