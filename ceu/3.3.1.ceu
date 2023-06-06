@@ -1,0 +1,27 @@
+;; variante 1
+val tree = [
+	:aaa,
+	[
+		:xxx,
+		:yyy,
+	],
+	:bbb
+]
+
+func :rec f(t, i) {
+	if #t == i {
+		#[]
+	} else {
+		if t[i] is? :tuple {
+			f(t[i], 0) ++ f(t, i+1)
+		} else {
+			#[t[i]] ++ f(t, i+1)
+		}
+	}
+}
+
+;; variante 1 funcionando
+loop in iter(f(tree, 0)), leaf {
+	println(leaf)
+}
+
