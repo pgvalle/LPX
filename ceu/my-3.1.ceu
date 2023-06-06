@@ -1,0 +1,53 @@
+^["@/pico/pico.ceu"]
+
+pico-state-set-title("pico-Ceu: Hello World!")
+
+task Line (pos :XY, vel :XY, clr) {
+  par {
+    every :Pico.Draw {
+      pico-state-set-color-draw(clr)
+      pico-output-draw-pixel(pos)
+    }
+  } with {
+    every 50:ms {
+      set pos.x = pos.x + vel.x
+      set pos.y = pos.y + vel.y
+    }
+  }
+}
+
+task Figure (pos :XY, clr) {
+  task Move(vel: XY) {
+      awaiting 1000:ms {
+        every 50:ms {
+          set pos.x = pos.x + vel.x
+          set pos.y = pos.y + vel.y
+        }
+      }
+    }
+  }
+
+  par {
+    every :Pico.Draw {
+      pico-state-set-color-draw(clr)
+      pico-output-draw-pixel(pos)
+    }
+  } with {
+    await Move([1,0])
+    await Move([0,1])
+    await Move([-1,0])
+    await Move([0,-1])
+  }
+}
+
+spawn {
+  spawn Line([-25,25],[1,-1], [255, 0, 0, 255])
+  spawn Line([-25,-25],[1,1], [0, 255, 0, 255])
+  spawn Line([-25,0],[1,0], [0, 0, 255, 255])
+  spawn Line([25,0],[-1,0], [255, 255, 0, 255])
+  spawn Figure([-25,0], [0, 0, 255, 255])
+  await 5:s
+  pico-quit()
+}
+
+pico-loop()
