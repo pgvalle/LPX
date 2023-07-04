@@ -30,6 +30,15 @@ task Figure (pos :XY, c) {
     every :Pico.Draw {
       pico-state-set-color-draw(c)
       pico-output-draw-pixel(pos)
+			;; cross
+      pico-output-draw-pixel([pos.x + 1, pos.y])
+      pico-output-draw-pixel([pos.x + 2, pos.y])
+      pico-output-draw-pixel([pos.x - 1, pos.y])
+      pico-output-draw-pixel([pos.x - 2, pos.y])
+      pico-output-draw-pixel([pos.x, pos.y + 1])
+      pico-output-draw-pixel([pos.x, pos.y - 1])
+      pico-output-draw-pixel([pos.x, pos.y - 2])
+      pico-output-draw-pixel([pos.x, pos.y - 3])
     }
   } with {
 		loop {
@@ -45,6 +54,6 @@ spawn Line([-25,25],[1,-1], [255, 0, 0, 255])
 spawn Line([-25,-25],[1,1], [0, 255, 0, 255])
 spawn Line([-25,0],[1,0], [0, 0, 255, 255])
 spawn Line([25,0],[-1,0], [255, 255, 0, 255])
-spawn Figure([-25,0], [255, 255, 255, 255])
+spawn Figure([-5, -5], [255, 255, 255, 255])
 
 pico-loop()
