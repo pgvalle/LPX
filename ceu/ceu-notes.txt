@@ -6,3 +6,15 @@ toggle :Event1 -> :Event2 {
 }
 
 toggle prevents awaits inside of it to wake up when Event1 happens until Event2 happens.
+
+where
+
+usage:
+where {
+	val v1 = []
+	func a() {
+		;; ...
+	}
+}
+
+define undefined symbols in a specific context
